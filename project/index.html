@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rövid történetek</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="mystyles.css"> 
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const articlecontent = document.getElementById('content').innerText;
+            const words = articlecontent.split(/\s+/).length;
+            const wordsperminute = 200;
+            const readingtime = Math.ceil(words / wordsperminute);
+
+            document.querySelector('.reading_time').textContent = 'Olvasási idő: ~' + readingtime + ' perc';
+        });
+
+        let originalContent = '';
+        function highlightText() {
+            var searched = document.getElementById('search_bar').value.trim().toLowerCase();
+            var contentParagraph = document.getElementById('content');
+            var text = contentParagraph.innerHTML;
+            var words = text.split(' ');
+            
+            if (!originalContent) {
+                originalContent = contentParagraph.innerHTML;
+            }
+        
+            clearHighlights();
+
+            if (searched) {
+            for (var i = 0; i < words.length; i++) {
+                if (words[i].toLowerCase() === searched) {
+                    words[i] = '<span class="highlight">' + words[i] + '</span>';
+                }
+            }
+            contentParagraph.innerHTML = words.join(' ');
+            }
+            
+        }
+
+        function clearHighlights() {
+            const contentParagraph = document.getElementById('content');
+            contentParagraph.innerHTML = originalContent;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const api_url = 'https://jsonplaceholder.typicode.com/users';
+
+            fetch(api_url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * data.length);
+                        const randomElement = data[randomIndex];
+                        
+                        document.getElementById('elementNev').innerText = randomElement.name;
+                        document.getElementById('elementEmail').innerText = randomElement.email;
+                        document.getElementById('elementEmail').href = `mailto:${randomElement.email}`;
+                        document.getElementById('elementTel').innerText = randomElement.phone;
+                        document.getElementById('elementCeg').innerText = randomElement.company.name;
+                    } else {
+                        document.getElementById('randomElement').innerText = 'Ismeretlen szerző.';
+                    }
+                })
+        });
+
+    </script>
+    
+    </head>
+	<body id="content">
+        <a id="jumpup"></a>
+        <header>
+            <a href="#jumpdown">Ugrás az oldal aljára</a>
+            <div class="search_container">
+                <input type="text" id="search_bar" placeholder="Keresés szövegre">
+                <button id="search_button" onclick="highlightText()">Keres</button>
+            </div>
+        </header>
+        <div class="container_mine">
+            <h1>Rövid történetek</h1>
+            <p class="reading_time"></p>
+            <nav>
+                <ul>
+                    <li><a href="#island">A Feledés Szigete</a></li>
+                    <li><a href="#wonder">Csodavilág - A Képzeletbeli Utazás Birodalma</a></li>
+                    <li><a href="#food">Az Ízek Birodalma - Fantasztikus Kulináris Utazás</a></li>
+                </ul>
+            </nav>        
+            <a id="island"></a>
+            <h2>A Feledés Szigete</h2>
+            <source srcset="feledesszigete.jpeg">
+            <img src="feledesszigete.jpeg" alt="Picture with an island">
+            <p>Mélyen a múlt homályában, ahol az időcsavarok elrejtik az igazságot, ott található a Feledés Szigete. Ez a rejtett sziget az idő felett uralma alatt áll, és csak a bátrak és az álmodozók találják meg útjukat ide.
+            A Feledés Szigetén az <a href="https://www.youtube.com/watch?v=bz-_N9mQFiE" target="_blank">idő megáll</a>, és az elfeledett történetek, legendák és mitológiák életre kelnek. A part mentén számos rejtett barlang található, amelyekben az idő kavargása mögött ősi írások és eltemetett kincsek rejlenek.
+            Az egyik legismertebb barlang a Kalandorok Sikolya, ahol az időutazók hősi tetteikről mesélnek, és az eltűnt birodalmak rejtélyeit őrzik. Itt találkozhatunk az időhajók kapitányával, aki sosem hagyja abba a múlt felfedezését, és mindig készen áll egy új kalandra.
+            A Sziget közepén magasodik a Bölcsesség Hegye, amely a múlt, a jelen és a jövő bölcsességét őrzi. A hegy csúcsán a Tudás Tűze ég, amely mindig éberen őrködik az emberiség felett, és mindenkinek útmutatást ad az időjárás és az élet viharai között.
+            De vigyázz! A Feledés Szigetén minden kincsnek ára van, és az időcsavarok rejtélyei gyakran az elme határait feszegetik. Csak azok, akik bátorsággal és tiszta szívvel járnak, találhatják meg az igazi kincseket ezen a titokzatos szigeten.
+            Az időutazásoknak nincs vége a Feledés Szigetén. Minél mélyebbre ásunk a múlt homályában, annál több titokra és kalandra bukkanhatunk. Talán az elveszett birodalmak újraépülnek, vagy talán csak az álmokban élnek tovább. De egy dolog biztos: a Feledés Szigete örökké várja azokat, akik vállalják az idő csavaros útjait, hogy felfedezzék az elveszett történetek varázsát.</p>
+            <p>Feledés Szigetén minden nap új kalandok várnak az időutazókra. A Sziget sokféle területén változatos veszélyek és lehetőségek várják az arra vállalkozókat. Találhatunk itt varázslatos erdőket, melyekben az ősi fák mesélnek az idők szelei által hordott történetekről, sötét barlangokat, melyek mélyén ősi titkokat őriznek, és tágas mezőket, melyeken az időcsavarok táncot járnak a nap sugarai között.
+            A Kalandorok Sikolyán túl húzódik a Múlt Szele, egy misztikus hely, mely az idő peremén táncol. A Múlt Szele a múlt időszakainak hajnalánál kezdődik, és az évszázadok során számos történelmi eseményt és legendát idéz meg. Az időutazók itt újraélhetik a múlt nagy pillanatait, vagy akár megváltoztathatják az idő folyását egy-egy apró beavatkozással.
+            Sziget egy másik különleges része a Varázslat Völgye, ahol az idő és tér határai összemosódnak. Ez a varázslatos vidék otthont ad a legkülönfélébb mágikus lényeknek és jelenségeknek. Itt találkozhatunk tündérekkel, tündérekkel, varázslókkal és egyéb misztikus teremtményekkel, akik mind-mind saját varázslatos történeteket rejtenek.
+            Ahogy az időutazók mélyebbre hatolnak a Feledés Szigetén, úgy válnak egyre részeseivé az itt élő történeteknek és legendáknak. Minden újabb kaland során egy újabb részletet fedezhetnek fel az ősi múltból, és egy újabb darabkát illeszthetnek a Feledés Szigetének bonyolult és varázslatos mozaikjába.
+            A Feledés Szigetén az időutazás nem csak egy kaland, hanem egy belső utazás is. Az itt megtett lépések nem csak a sziget térképén, hanem a szívünkben is mély nyomokat hagynak. Az itt átélt kalandok és találkozások segítenek nekünk jobban megérteni önmagunkat és a világot, és megtanítanak minket arra, hogy a múltban és a jövőben is megtaláljuk a helyünket.</p><hr>
+            
+            <a id="wonder"></a>
+            <h2>Csodavilág - A Képzeletbeli Utazás Birodalma</h2>
+            <source srcset="wonderland.jpeg">
+            <img src="wonderland.jpeg" alt="Picture about wonderland">
+            <p>Üdvözöllek a Csodavilágban, ahol az ég színei örökké változnak, és a fák leveli helyett apró könyvekkel díszítik ágaikat. Itt minden szikra egy újabb történet kezdetét jelenti, és minden álom valósággá válik.</p>
+            <p>A Csillagút utcáin sétálva találkozhatsz az Álomfogóval, aki varázslatos álmokat sző éjszakáról éjszakára. Az ő csillagokkal teli palotájában minden álom lehetőség, és minden éjszaka egy újabb kaland kezdete.
+            A Bámulatos Tenger partjain pihenve hallgathatod a Hullámok Meséit, amelyek hajnalonként a partra szökkennek, hogy elmeséljék az óceán titkait és kalandjait. A tenger mélyén élő kagylók világát felfedezve találkozhatsz a Zengő Város lakóival, akiknek énekük minden éjszakát varázslatossá tesz.
+            De vigyázz! A Csodavilágban minden álomnak és varázslatnak ára van, és az égi csillagok árnyékában gyakran elrejtőznek a sötét erők és veszélyek. Csak azok, akik bátorsággal és kitartással járnak, találhatják meg az igazi csodákat ezen a varázslatos helyen.
+            A Csodavilágban minden nap új kalandok várnak az utazókra. Az égig érő hegyek között magasodik a Varázslat Kútja, melynek vizéből az igaz szeretet és bátorság ereje fakad. A kút körül összegyűlnek az utazók, hogy egy korty varázslatban fürödjenek, és erejüket és akaratukat megerősítsék.
+            A Csillaghullás Mezőin sétálva találkozhatsz az Álmok Óriásával, aki minden éjjel az égbolton keresztül suhan, és a csillagok közötti utazásra hívja az álmodozókat. Az óriás lapátolja az égi porfelhőket, hogy újabb és újabb csillagok szülessenek, és újabb és újabb álmok gyökerezzenek meg az emberek szívében.
+            A Csodavilágban minden évszaknak megvan a maga csodája és varázsa. Tavasszal a Virághegyek kinyílnak, és az egész tájat virágok szőnyege borítja, melynek illata az egész birodalmat betölti. Nyáron a Napfény Palotájában naponta tartanak vidám ünnepeket és játékokat, melyekben mindenki részt vehet és örömét lelheti.
+            Az Őszi Erdőkben az örökzöldek mellett az őszi levelek tánca varázsolja el az utazókat, míg télen a Hókristály Város fehér palotái ragyognak az éjszakában, és a Téli Fény ünnepe napján az egész birodalom együtt ünnepel.</p>
+            <p>A Csodavilágban minden nap új kalandok várnak az utazókra. Az égig érő hegyek között magasodik a Varázslat Kútja, melynek vizéből az igaz szeretet és bátorság ereje fakad. A kút körül összegyűlnek az utazók, hogy egy korty varázslatban fürödjenek, és erejüket és akaratukat megerősítsék.
+            A Csillaghullás Mezőin sétálva találkozhatsz az Álmok Óriásával, aki minden éjjel az égbolton keresztül suhan, és a csillagok közötti utazásra hívja az álmodozókat. Az óriás lapátolja az égi porfelhőket, hogy újabb és újabb csillagok szülessenek, és újabb és újabb álmok gyökerezzenek meg az emberek szívében.</p><hr>
+            
+            <a id="food"></a>
+            <h2>Az Ízek Birodalma - Fantasztikus Kulináris Utazás</h2>
+            <source srcset="kulimuli.jpeg">
+            <img src="kulimuli.jpeg" alt="Picture with foods">
+            <p>Kóstold meg az ízek birodalmát, ahol a kék fűszálak mézes ízűek, és a harmatcseppek kandírozott gyümölcsökkel teli. Üdvözöllek az Ízek Birodalmában, ahol minden falat egy varázslat, és minden étel egy történet.</p>
+            <p>Az Édes Levegő Kertjeiben sétálva érezheted, ahogy a mézes szellők simogatják az arcodat, és a cukrozott virágok édes illata betölti az egész tájat. A kert színes virágai között barangolva találkozhatsz a Sütő Mesterekkel, akik minden nap újabb és újabb csodás süteményeket sütnek az édes álmokért.
+            A Sóföldek szikrázó sóbányáiban felfedezheted az Ízek Birodalmának legősibb titkait. A só kristályai nem csak az ételeket fűszerezik, hanem az időt is megőrzik, és az ősi történeteket mesélik el azoknak, akik hallani akarják.
+            A Tűzvadászok táboraiban a lángok játéka mellett élvezheted az ízeket és az illatokat. A sütés és főzés mesterei minden nap újabb és újabb kulináris csodákat alkotnak a tűz erejével és a szeretettel.</p>
+            <p>De vigyázz! Az Ízek Birodalmában minden ételnek és íznek ára van, és az ételek fogyasztása gyakran új kalandok és veszélyek elé állítja az utazókat. Csak azok, akik bátorsággal és ínyükkel járnak, találhatják meg az igazi ízeket ezen a fantasztikus helyen.
+            Az Ízek Birodalmában minden falat egy történetet mesél el, és minden étel egy különleges emléket idéz fel. Az ételek fogyasztása nem csak az érzékeknek szól, hanem a szívnek és a léleknek is. Az ízek és illatok által egy új világba kalandozhatunk el, és megismerhetjük az élet legmélyebb titkait.
+            Az Ízek Birodalma nem csak a gasztronómia birodalma, hanem az élet és az élvezetek birodalma is. Itt minden ételnek megvan a maga varázsa és története, és minden falat egy újabb kalandra hívja az utazókat.
+            Az Ízek Birodalma az érzékek birodalma, ahol az ételek és italok varázslatos világában mindenki megtalálhatja a számára legmegfelelőbb ízeket és élményeket. Itt az ételek és italok nem csak a testet táplálják, hanem a léleket is, és minden falat egy újabb emléket és történetet idéz fel azoknak, akik megkóstolják.</p><hr>
+            <h2>Szerző:</h2>
+            <div class="szerzo" id="szerzo">
+                <p><strong>Név:</strong> <span id="elementNev"></span></p>
+                <p><strong>E-mail:</strong> <a id="elementEmail"  href="#"></a></p>
+                <p><strong>Tel szám:</strong> <span id="elementTel"></span></p>
+                <p><strong>Cég:</strong> <span id="elementCeg"></span></p>
+            </div><hr>
+
+            <h3>Cikk küldése ismerősnek</h3>
+            <form class="form-floating" action="#" method="post">
+
+                <div class="row">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="*Vezetéknév" aria-label="Vezetéknév" required>
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="*Keresztnév" aria-label="Keresztnév" required>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <input type="tel" class="form-control" placeholder="*Telefonszám" aria-label="Telefonszám" required>
+                </div>
+
+                <div class="col">
+                    <input type="email" class="form-control" placeholder="*Email" aria-label="Email" required>
+                </div>
+
+                <div class="col">
+                    <input type="number" class="form-control" placeholder="*Kor: (min 18)" aria-label="Kor" required min="18">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-text">Üzenet:</span>
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Ide írja az üzenetet..."></textarea>
+                  </div>
+
+                <div class="kuld">
+                    <input type="submit" value="Küldés">
+                </div>
+
+                <div>
+                    <label>*kötelezően kitöltendő</label>
+                </div>
+            </form>
+        </div>
+        <a id="jumpdown"></a>
+        <footer>
+            <a href="#jumpup">Ugrás az oldal tetejére</a>
+        </footer>
+    
+    </body>
+</html>
