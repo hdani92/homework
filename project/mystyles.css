@@ -8,6 +8,7 @@ html {
     --light_bg: white;
     --light_tx_color: black;
     --light_head_foot_color: brown;
+    
 }
 
 body { 
@@ -89,6 +90,10 @@ label {
     border: 1px solid var(--dark_head_foot_color);
     border-radius: 20px;
     font-size: 1em;
+}
+
+.szerzo {
+    text-align: right;
 }
 
 nav ul {
